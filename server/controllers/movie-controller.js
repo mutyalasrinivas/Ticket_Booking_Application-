@@ -1,6 +1,8 @@
  import jwt from 'jsonwebtoken';
  import Movie from '../models/Movie.js'
  import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import Admin from '../models/Admin.js';
  dotenv.config()
  
  export const addMovie = async(req,res,next)=>{
@@ -32,7 +34,13 @@
     let movie
     try{
        movie = new Movie({title,description,releaseDate:new Date(`${releaseDate}`),actors,posterUrl,featured,admin:adminId})
-       movie=await movie.save();
+       const session=await mongoose.startSession();
+       let adminUser=await Admin.findById(adminId);
+       session.startTransaction();
+       await movie.save({session});
+       adminUser.addedMovies.push(movie);
+       await adminUser.save({session})
+       await session.commitTransaction();
     }catch(err){
         console.log(err);
     }
@@ -43,4 +51,33 @@
 
  }
 
+ export const getAllMovies=async(req,res,next)=>{
+   
+   let movies;
+    try{
+      movies=await Movie.find()
+    }catch(err){
+        console.log(err);
+    }
+    if(!movies){
+        return res.status(500).json({message:"somethig went wrong"})
+    }
+    return res.status(200).json({movies});
+ }
+
+ export const getMovieById=async(req,res,next)=>{
+    const id=req.params.id;
+    let movie;
+    try{
+        movie=await Movie.findById(id);
+        console.log(movie)
+    }catch(err){
+        console.log(err);
+    }
+
+    if(!movie){
+        return res.status(500).json({message:"something went wrong"});
+    }
+    return res.status(200).json({movie});
+ }
  

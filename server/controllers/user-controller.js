@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
+import Bookings from '../models/Bookings.js';
 export const getAllUsers=async (req,res,next)=>{
      let users;
      try{
@@ -42,7 +43,7 @@ export const signup=async(req,res,next)=>{
    if(!user){
      return res.status(500).json({message:"internal server error"})
    }
-  return res.status(201).json({user});
+  return res.status(201).json({id:user._id});
 } 
 
 export const updateUser = async(req,res,next)=>{
@@ -108,5 +109,19 @@ export const login=async(req,res,next)=>{
       if(!matchPassword){
          return res.status(400).json({message:"Incorect password"})
       } 
-      return res.status(200).json({existingUser,message:"succesfully logedin"})
+      return res.status(200).json({message:"succesfully logedin",id:existingUser._id,user:existingUser})
+}
+
+export const getBookingsOfUser = async(req,res,next)=>{
+   const id=req.params.id;
+   let bookings;
+   try{
+      bookings=await Bookings.find({user:id});
+   }catch(err){
+      console.log(err);
+   }
+   if(!bookings){
+      return res.status(404).json({message:"You dont any bookings"})
+   }
+   return res.status(200).json({bookings});
 }

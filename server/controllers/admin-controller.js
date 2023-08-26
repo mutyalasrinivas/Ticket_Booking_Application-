@@ -62,3 +62,17 @@ export const adminLogin =async(req,res,next)=>{
     return res.status(200).json({message:"successfully loggedIn",token,id:existingAdmin._id})
     
 }
+
+export const getAdmins=async(req,res,next)=>{
+     
+    let admins;
+    try{
+        admins=await Admin.find()
+      }catch(err){
+        console.log(err);
+    }
+    if(!admins){
+        return res.status(500).json({message:'something went wrong'})
+    }
+    return res.status(200).json({admins})
+}
