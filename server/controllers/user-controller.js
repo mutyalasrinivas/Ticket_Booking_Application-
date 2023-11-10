@@ -116,7 +116,9 @@ export const getBookingsOfUser = async(req,res,next)=>{
    const id=req.params.id;
    let bookings;
    try{
-      bookings=await Bookings.find({user:id});
+      bookings=await Bookings.find({user:id})
+               .populate("movie")
+               .populate("user")
    }catch(err){
       console.log(err);
    }
@@ -124,4 +126,18 @@ export const getBookingsOfUser = async(req,res,next)=>{
       return res.status(404).json({message:"You dont any bookings"})
    }
    return res.status(200).json({bookings});
+}
+
+export const getUserDetails=async(req,res,next)=>{
+    const id=req.params.id;
+    let user;
+    try{
+        user=await User.findById(id);
+      if(!user){
+         return res.status(404).json({message:"user not found"})
+      }
+      return res.status(200).json({user});
+    }catch(err){
+      console.log(err);
+    }
 }

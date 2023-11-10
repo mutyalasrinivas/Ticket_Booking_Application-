@@ -13,15 +13,8 @@ const Movies= ()=>{
             All Movies
         </Typography>
        <Box width={"100%"} margin={"auto"} marginTop={5}  display={"flex"} justifyContent={"flex-start"} flexWrap={"wrap"}>
-       {movies&&movies.map((movie,index)=>(
-            <MovieItem 
-                id={movie._id} 
-                title={movie.title} 
-                description={movie.description}
-                releaseDate={movie.releaseDate} 
-                posterUrl={movie.posterUrl} 
-                key={index}
-            />
+       {movies&&movies.map((movie)=>(
+            <MovieItem  id={movie._id} releaseDate={movie.releaseDate} posterUrl={movie.posterUrl} description={movie.description}   key={movie._id}/>
         ))}
       </Box>  
 
@@ -30,3 +23,5 @@ const Movies= ()=>{
 }
 
 export default Movies;
+
+

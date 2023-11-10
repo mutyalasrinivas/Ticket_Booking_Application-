@@ -17,7 +17,7 @@ import { adminActions, userActions } from "../store";
         getAllMovies().then((data)=>setMovies(data.movies)).catch(err=>console.log(err))
     },[])
     const logout=(isAdmin)=>{
-       return isAdmin?dispatch(adminActions.logout()):dispatch(userActions.logout()); 
+       dispatch(isAdmin?adminActions.logout():userActions.logout()); 
     }
      
     return  <AppBar position="sticky" sx={{backgroundColor:"orange"}} >
@@ -40,11 +40,12 @@ import { adminActions, userActions } from "../store";
                         <Tab LinkComponent={Link} to="/auth" label="Auth"/>
                     </>)
                     }
-                    {isUserLoggedIn&&(<>
+                    {isUserLoggedIn && (
+                    <>
                         <Tab LinkComponent={Link} to="/user" label="Profile"/>
                         <Tab onClick={()=>logout(false)} LinkComponent={Link} to="/" label="Logout"/>
-                    </>)
-                    }
+                    </>
+                    )}
                     {isAdminLoggedIn&&(<>
                     <Tab LinkComponent={Link} to="/add" label="Add Movie"/>
                     <Tab LinkComponent={Link} to="/admin" label="Profile"/>

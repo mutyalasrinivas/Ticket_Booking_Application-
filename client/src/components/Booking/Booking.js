@@ -1,14 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieDetails } from '../../api-helpers/api-helpers';
+import { getMovieDetails, newBooking } from '../../api-helpers/api-helpers';
 import { Box, FormLabel, TextField, Typography,Button } from '@mui/material';
 
 const Booking=()=>{
     const [movie,setMovie]=useState();
     const [inputs,setInputs]=useState({seatNumber:"" , date:""})
     const id=useParams().id;
-    console.log(id)
-    useEffect(()=>{
+     useEffect(()=>{
       getMovieDetails(id).then((res)=>setMovie(res.movie)).catch(err=>console.log(err))
     },[id])
   
@@ -20,18 +19,20 @@ const Booking=()=>{
 
     const handleSubmit=(e)=>{
       e.preventDefault();
-      console.log(inputs)
-    }
-    console.log(movie,"movie");
- return <div> 
+      newBooking({...inputs,movie:movie._id})
+      .then((res)=>console.log(res))
+      .catch(err=>console.log(err))
+     }
+  return <div> 
    { movie && <Fragment>
     <Typography
       padding={3}
       fontFamily={"fantasy"}
       variant ={"h4"}
+      color={"orange"}
       textAlign={"center"}
     >
-       Book Tickets Of: {movie.title}
+      {movie.title}
     </Typography>
     <Box display={"flex"} justifyContent={"center"}>
       <Box display={"flex"}

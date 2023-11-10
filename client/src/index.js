@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import {createRoot} from 'react-dom/client';
 import './index.css';
 import App from './App';
  import {BrowserRouter} from 'react-router-dom';
@@ -7,7 +7,7 @@ import App from './App';
 import axios from 'axios';
 import { store } from './store';
  
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));
 axios.defaults.baseURL="http://localhost:5000"
 root.render(
   <React.StrictMode>
@@ -19,5 +19,3 @@ root.render(
      
   </React.StrictMode>
 );
-
- 

@@ -3,7 +3,7 @@ import Movie from "../models/Movie.js";
 import User from "../models/User.js";
 import mongoose from "mongoose";
 export const newBooking=async(req,res,next)=>{
-     const {movie,date,seatnumber,user}=req.body;
+     const {movie,date,seatNumber,user}=req.body;
      let existingMovie;
      let existingUser;
      try{
@@ -21,7 +21,7 @@ export const newBooking=async(req,res,next)=>{
      
      let booking;
      try{
-         booking=new Bookings({movie,date:new Date(`${date}`),seatnumber,user})
+         booking=new Bookings({movie,date:new Date(`${date}`),seatNumber,user})
          const session=await mongoose.startSession();
          session.startTransaction();
          existingUser.bookings.push(booking);

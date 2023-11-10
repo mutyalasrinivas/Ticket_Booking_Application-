@@ -21,9 +21,10 @@ const HomePage=()=>{
           <Typography variant={"h4"} textAlign={"center"} color={"orange"}>Latest Releases</Typography>
         </Box>
         <Box margin={"auto"} display="flex" width="80%" justifyContent={"center"} alignItems="center" flexWrap="wrap">
-            {movies&&movies.slice(0,4).map((movie,index)=>(
-                <MovieItem id={movie.id} title={movie.title} releaseDate={movie.releaseDate} posterUrl={movie.posterUrl} description={movie.description} key={index}/>
+            {movies&&movies.slice(0,4).map((movie)=>(
+                <MovieItem id={movie._id} title={movie.title} releaseDate={movie.releaseDate} posterUrl={movie.posterUrl} description={movie.description} key={movie.id}/>
             ))}
+            
         </Box>
         <Box display={"flex"}  padding={5} margin={"auto"}>
            <Button LinkComponent={Link} to="/movies" variant="outlined"   sx={{margin:"auto",color:"orange"}}>All Movies</Button>
