@@ -23,17 +23,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
       <Fragment>
         {" "}
      {user&&(<Box  width={"30%"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
-        <AccountCircleIcon sx={{fontSize:"10rem" ,textAlign:"center",ml:9}}/>
-        <Typography 
+         <Typography 
         border={"1px solid #ccc"}
         padding={1}
         width={"auto"}
         borderRadius={5}
         textAlign={"center"}
         variant="h6"
-        margin={2}
+        marginTop={15}
+         
         >
-          Name:{user.name}
+        Name:{user.name}
         </Typography>
         <Typography
           padding={1}
@@ -41,6 +41,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
           borderRadius={5}
           textAlign={"center"}
           variant="h6"
+          margin={3}
           border={"1px solid #ccc"}>
           {user.email}
         </Typography>
@@ -54,7 +55,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
          <List>
           
           {bookings.map((booking)=>(
-              <ListItem sx={{color:"white",bgcolor:"#5B7C99",textAlign:"center",margin:1}}>   
+              <ListItem sx={{color:"white",bgcolor:"#94d6b8",textAlign:"center",margin:1}}>   
                 <ListItemText sx={{margin:1,width:"auto",textAlign:"left"}}>
                    <div>
                       Movie:<br/>

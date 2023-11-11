@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { adminActions, userActions } from "./store";
 import Booking from "./components/Booking/Booking";
 import UserProfile from "./components/Profile/UserProfile";
+import AdminProfile from "./components/Profile/AdminProfile";
+import AddMovie from "./components/Movies/AddMovie";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,10 +32,11 @@ function App() {
       <section>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<AdminProfile />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/user" element={<UserProfile/>}  />
+          <Route path="/add" element={<AddMovie/>}/>
           <Route path="/booking/:id" element={<Booking />} />
         </Routes>
       </section>
