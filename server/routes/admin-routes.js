@@ -1,11 +1,11 @@
 import express from 'express';
 const adminRouter=express.Router();
-import { addAdmin,adminLogin, getAdmins} from '../controllers/admin-controller.js';
+import { addAdmin,adminLogin, getAdminById} from '../controllers/admin-controller.js';
 
-adminRouter.get('/',getAdmins);
+adminRouter.get('/:id',getAdminById);
 adminRouter.post('/signup',addAdmin);
 adminRouter.post('/login',adminLogin);
-
+ 
 
 
 

@@ -81,3 +81,23 @@ import Admin from '../models/Admin.js';
     return res.status(200).json({movie});
  }
  
+ export const deleteMovie=async(req,res,next)=>{
+    const id=req.params.id;
+    let movie;
+    try{
+        movie=await Movie.findByIdAndRemove(id).populate("admin bookings");
+        const session= await mongoose.startSession();
+        session.startTransaction();
+        await movie.admin.addedMovies.pull(movie)
+        await movie.bookings.pull(movie)
+        await movie.admin.save({session})
+         session.commitTransaction();
+         
+    }catch(err){
+        console.log(err);
+    }
+    if(!movie){
+         return res.status(500).json({message:"movie not deleted"})   
+    }
+    return res.status(200).json({message:"successfully deleted"})
+ }

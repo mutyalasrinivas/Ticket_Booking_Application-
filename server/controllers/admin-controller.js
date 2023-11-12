@@ -63,16 +63,20 @@ export const adminLogin =async(req,res,next)=>{
     
 }
 
-export const getAdmins=async(req,res,next)=>{
-     
-    let admins;
+export const getAdminById=async(req,res,next)=>{
+    const id=req.params.id;
+    let admin;
     try{
-        admins=await Admin.find()
+        admin=await Admin.findById(id)
+                      .populate("addedMovies")
       }catch(err){
         console.log(err);
     }
-    if(!admins){
+    if(!admin){
         return res.status(500).json({message:'something went wrong'})
     }
-    return res.status(200).json({admins})
+    return res.status(200).json({admin})
 }
+
+ 
+ 

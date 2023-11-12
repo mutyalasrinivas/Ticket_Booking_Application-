@@ -1,7 +1,7 @@
 import React ,{useEffect,useState} from "react";
 import { getAllMovies } from "../api-helpers/api-helpers";
 
-import {AppBar,Toolbar ,Autocomplete,TextField, Tabs,Tab} from "@mui/material";
+import {AppBar,Toolbar ,Autocomplete,TextField, Tabs,Tab, Typography} from "@mui/material";
 import MovieCreationIcon from '@mui/icons-material/MovieCreation';
 import {Box} from '@mui/system';
 import { Link } from "react-router-dom";
@@ -22,8 +22,9 @@ import { adminActions, userActions } from "../store";
      
     return  <AppBar position="sticky" sx={{backgroundColor:"orange"}} >
         <Toolbar > 
-            <Box width={'20%'}>
+            <Box width={'20%'} display={"flex"}>
                 <MovieCreationIcon/>
+                <Typography >Book My Tickets</Typography>
             </Box>
             <Box width={'30%'} margin={'auto'}>
             <Autocomplete 

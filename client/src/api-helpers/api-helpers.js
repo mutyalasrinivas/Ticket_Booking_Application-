@@ -103,6 +103,35 @@ export const getUserDetails=async()=>{
      
 }
 
+export const getAdminDetails=async()=>{
+    try{
+      const id=localStorage.getItem("adminId");
+      const res=await axios.get(`/admin/${id}`)
+      if(res.status!==200){
+        return res.send.json({message:"something went wrong"})
+      }
+      const resData=await res.data
+      return resData;
+    }catch(err){
+      console.log(err);
+    }
+}
+
+export const deleteMovie =async(id)=>{
+  try{
+    const res= await axios.delete(`/movie/${id}`)
+    if(res.status!==200){
+      return console.log("unable to delete movie!!!")
+    }
+    const resData=await res.data;
+    return resData;
+  }catch(err){
+    console.log(err);
+  }
+  
+}
+
+
 export const deleteBooking=async(id)=>{
    const res= await axios.delete(`/booking/${id}`)
               .catch((err)=>console.log(err))
